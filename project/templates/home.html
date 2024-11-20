@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%  load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+    <div id="my-division">
+        Initial Content
+    </div>
+    <!-- <button onclick="refreshDivision()">Update Content</button> -->
+    <!-- OR -->
+    <!-- <button onclick="refreshDivisionHtml()">Update Content</button> -->
+    
+    <script>
+        function refreshDivision() {
+            fetch('/update-division/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                console.log("the contentis automatecally loaded ")
+                div=document.querySelector('#my-division');
+                // div.innerHTML="";
+                data.message.forEach(element => {
+                    const row=document.createElement('div');
+                    row.innerHTML=`
+                <p>${element.Name}</p>
+                `
+                div.appendChild(row);
+
+                    
+                });
+
+                // document.getElementById('my-division').innerText = data.message;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+ 
+        // Call the function to refresh
+        setInterval(refreshDivision,1000);
+        // refreshDivision(); 
+    //   </script>
+      <script>
+        function refreshDivisionHtml() {
+            fetch('/update-division-html/')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('my-division').innerHTML = 'html';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+      
+        // Call the function to refresh
+        refreshDivisionHtml();
+      </script>
+      
+</body>
+</html>

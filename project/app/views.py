@@ -29,4 +29,4 @@ def add(request):
     return render(request, 'add.html')
 
 def demo(req):
-    return render(req,'demo.html')
+    return render(req,'demofile.html')

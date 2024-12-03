@@ -27,3 +27,6 @@ def add(request):
         data.save()
         return redirect(add)
     return render(request, 'add.html')
+
+def demo(req):
+    return render(req,'demo.html')
